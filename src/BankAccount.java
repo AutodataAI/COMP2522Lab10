@@ -8,7 +8,7 @@
 
 public class BankAccount {
 
-    private String accountNum;
+    final private String accountNum;
     private int balanceUSD;
 
     /** Constructor of BankAccount Object.
@@ -16,6 +16,12 @@ public class BankAccount {
      * @param initialBalanceUSD initial balance of bank account in USD
     */
     public BankAccount(final String accountNum, int initialBalanceUSD ) {
+
+        if(accountNum == null || accountNum.isBlank())
+        {
+            throw new IllegalArgumentException("Invalid account number.");
+        }
+
         this.accountNum = accountNum;
         this.balanceUSD = initialBalanceUSD;
     }
@@ -36,6 +42,12 @@ public class BankAccount {
      * @param amount to deposit in USD
      * */
     public void deposit(final int amount) {
+
+        if(amount <= 0)
+        {
+            throw new IllegalArgumentException("Deposit amount must be greater than zero.");
+        }
+
         this.balanceUSD += amount;
     }
 
@@ -44,7 +56,12 @@ public class BankAccount {
      * */
     public void withdraw(final int amount) {
 
-        if (amount < this.balanceUSD)
+        if(amount <= 0)
+        {
+            throw new IllegalArgumentException("Withdraw amount must be greater than zero.");
+        }
+
+        if (amount <= this.balanceUSD)
         {
             this.balanceUSD -= amount;
         } else
@@ -67,6 +84,10 @@ public class BankAccount {
         if (this.accountNum.equals(originatingAccountNum)){
             this.withdraw(amountToTransfer);
             targetAccount.deposit(amountToTransfer);
+        }
+        else
+        {
+            throw new IllegalArgumentException("Invalid account number.");
         }
     }
 }
