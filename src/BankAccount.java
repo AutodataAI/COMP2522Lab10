@@ -9,7 +9,7 @@
 public class BankAccount {
 
     private String accountNum;
-    private double balanceUSD;
+    private int balanceUSD;
 
     /** Constructor of BankAccount Object.
      * @param accountNum A string of account Number
@@ -22,7 +22,7 @@ public class BankAccount {
 
     /**
      * To get balance of account in USD.*/
-    public double getBalanceUSD() {
+    public int getBalanceUsd() {
         return this.balanceUSD;
     }
 
@@ -35,14 +35,14 @@ public class BankAccount {
     /** To deposit into account.
      * @param amount to deposit in USD
      * */
-    private void deposit(final double amount) {
+    private void deposit(final int amount) {
         this.balanceUSD += amount;
     }
 
     /** To withdraw from account.
      * @param amount to withdraw from account USD
      * */
-    private void withdraw(final double amount) {
+    private void withdraw(final int amount) {
         this.balanceUSD -= amount;
     }
 
@@ -53,13 +53,16 @@ public class BankAccount {
      *                              to send money from
      * @param amountToTransfer the amount to send
      * */
-    private void transferToBankA(final BankAccount targetAccount,
+    private void transferToBank(final BankAccount targetAccount,
                                  final String originatingAccountNum,
-                                 final double amountToTransfer)
+                                 final int amountToTransfer)
     {
         if (this.accountNum.equals(originatingAccountNum)){
             this.withdraw(amountToTransfer);
             targetAccount.deposit(amountToTransfer);
         }
     }
+
+
+
 }
