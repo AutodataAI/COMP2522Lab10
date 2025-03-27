@@ -21,12 +21,18 @@ public class BankAccount {
     }
 
     /**
-     * To get balance of account in USD*/
-    private double getBalanceUSD() {
+     * To get balance of account in USD.*/
+    public double getBalanceUSD() {
         return this.balanceUSD;
     }
 
-    /** T deposit into account.
+    /**
+     * To get account Number.*/
+    public String getAccountNum() {
+        return accountNum;
+    }
+
+    /** To deposit into account.
      * @param amount to deposit in USD
      * */
     private void deposit(final double amount) {
@@ -40,4 +46,20 @@ public class BankAccount {
         this.balanceUSD -= amount;
     }
 
+    /**
+     * To transfer balance from one account to another.
+     * @param targetAccount the account to send money to
+     * @param originatingAccountNum the account number of originating account
+     *                              to send money from
+     * @param amountToTransfer the amount to send
+     * */
+    private void transferToBankA(final BankAccount targetAccount,
+                                 final String originatingAccountNum,
+                                 final double amountToTransfer)
+    {
+        if (this.accountNum.equals(originatingAccountNum)){
+            this.withdraw(amountToTransfer);
+            targetAccount.deposit(amountToTransfer);
+        }
+    }
 }
