@@ -15,7 +15,7 @@ public class BankAccount {
      * @param accountNum A string of account Number
      * @param initialBalanceUSD initial balance of bank account in USD
     */
-    public void BankAccount(final String accountNum, int initialBalanceUSD ) {
+    public BankAccount(final String accountNum, int initialBalanceUSD ) {
         this.accountNum = accountNum;
         this.balanceUSD = initialBalanceUSD;
     }
@@ -35,15 +35,22 @@ public class BankAccount {
     /** To deposit into account.
      * @param amount to deposit in USD
      * */
-    private void deposit(final int amount) {
+    public void deposit(final int amount) {
         this.balanceUSD += amount;
     }
 
     /** To withdraw from account.
      * @param amount to withdraw from account USD
      * */
-    private void withdraw(final int amount) {
-        this.balanceUSD -= amount;
+    public void withdraw(final int amount) {
+
+        if (amount < this.balanceUSD)
+        {
+            this.balanceUSD -= amount;
+        } else
+        {
+            throw new IllegalArgumentException("Insufficient funds");
+        }
     }
 
     /**
@@ -53,7 +60,7 @@ public class BankAccount {
      *                              to send money from
      * @param amountToTransfer the amount to send
      * */
-    private void transferToBank(final BankAccount targetAccount,
+    public void transferToBank(final BankAccount targetAccount,
                                  final String originatingAccountNum,
                                  final int amountToTransfer)
     {
@@ -62,7 +69,4 @@ public class BankAccount {
             targetAccount.deposit(amountToTransfer);
         }
     }
-
-
-
 }

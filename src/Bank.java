@@ -29,16 +29,25 @@ public class Bank {
      * */
     public BankAccount retrieveAccount(final String accountNum) {
 
-        for (int i=0; i<accountList.size(); i++) {
+        for (int i=0; i < accountList.size(); i++) {
             if (accountList.get(i).getAccountNum().equalsIgnoreCase(accountNum)){
                 return accountList.get(i);
             }
         }
-        return null;
+
+        throw new IllegalArgumentException("Account not found");
     }
 
 
+    public int totalBalanceUsd()
+    {
+        int totalBalance = 0;
 
+        for (BankAccount account : accountList)
+        {
+            totalBalance += account.getBalanceUsd();
+        }
 
-
+        return totalBalance;
+    }
 }
